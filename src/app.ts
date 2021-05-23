@@ -12,7 +12,7 @@ import { resolve } from "path"
 import cookieSession from 'cookie-session';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import docs from '../docs.json';
+import docs from '../config/docs.json';
 
 import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';
