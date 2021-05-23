@@ -1,8 +1,12 @@
 ### Authentication Service
-[Description]
+Authentication Service is responsible for authenticating the users.
+Provides endpoints for signup, signin, signout and current user information.
+
+### Getting Started
+[Getting Started Section]
 
 ### Current State
-Under development
+Under Development
 
 ### Endpoints
 
