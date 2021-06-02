@@ -25,7 +25,7 @@ dotenv.config({ path: resolve(__dirname, "../config/config.env") });
 const app = express();
 
 const swaggerSpec = swaggerJSDoc(docs);
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api/users/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // not to have problem with ingress-ngnix
 app.set('trust proxy', true);
