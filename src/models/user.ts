@@ -66,7 +66,11 @@ userSchema.pre('save', async function (done) {
 
 // Sign JWT and return
 userSchema.methods.getSignedJwtToken = function () {
-  return jwt.sign({ id: this.get('id'), email: this.get('email') }, process.env.JWT_SECRET!); // without symbol "!" typescript is complaining because dont know about JWT_SECRET.
+  return jwt.sign({
+    id: this.get('id'),
+    email: this.get('email'),
+    name: this.get('name')
+  }, process.env.JWT_SECRET!); // without symbol "!" typescript is complaining because dont know about JWT_SECRET.
 };
 
 // Match user entered password to hashed password in database
