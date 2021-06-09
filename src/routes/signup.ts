@@ -5,6 +5,53 @@ import { BadRequestError, validateRequest } from '@uomlms/common';
 
 const router = express.Router();
 
+/**
+ * @swagger
+ *
+ * /api/users/signup:
+ *   post:
+ *     summary: Signs up a user.
+ *     description: Signs up a user.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: name
+ *         summary: Signs up a user.
+ *         description: The user's name
+ *         type: string
+ *         required: true
+ *       - name: email
+ *         description: The user's email
+ *         type: email
+ *         required: true
+ *       - name: password
+ *         description: The user's password
+ *         type: password
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Returns the current user. If JWT is not provided as cookie, will return null
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 currentUser:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: string
+ *                       description: The currennt user's id.
+ *                       example: 60a96e2f
+ *                     email:
+ *                       type: email
+ *                       description: The currennt user's email.
+ *                       example: test@test.gr
+ *                     iat:
+ *                       type: integer
+ *                       description: JWT Issued At.
+ *                       example: 1621717307
+ */
 router.post(
   '/api/users/signup',
   [
