@@ -9,6 +9,7 @@ interface UserAttrs {
   name: string,
   email: string,
   password: string
+  role?: string
 }
 
 // An interface that describes the properties
@@ -24,6 +25,7 @@ interface UserDoc extends mongoose.Document {
   name: string,
   email: string;
   password: string;
+  role?: string,
   getSignedJwtToken(): string;
   matchPassword(enteredPassword: string): boolean;
 }
@@ -40,6 +42,11 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, "Please add a password"]
+  },
+  role: {
+    type: String,
+    enum: ["student", "staff"],
+    default: "student"
   },
   createdAt: {
     type: Date,
@@ -69,7 +76,8 @@ userSchema.methods.getSignedJwtToken = function () {
   return jwt.sign({
     id: this.get('id'),
     email: this.get('email'),
-    name: this.get('name')
+    name: this.get('name'),
+    role: this.get('role')
   }, process.env.JWT_SECRET!); // without symbol "!" typescript is complaining because dont know about JWT_SECRET.
 };
 
