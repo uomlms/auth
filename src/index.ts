@@ -3,18 +3,10 @@ import { app } from './app';
 import { User } from './models/user';
 
 const createAdminUser = async () => {
-  if (
-    !process.env.ADMIN_USERNAME ||
-    !process.env.ADMIN_EMAIL ||
-    !process.env.ADMIN_PASSWORD
-  ) {
-    return;
-  }
-
   const data = {
-    name: process.env.ADMIN_USERNAME,
-    email: process.env.ADMIN_EMAIL,
-    password: process.env.ADMIN_PASSWORD,
+    name: process.env.ADMIN_USERNAME || "admin",
+    email: process.env.ADMIN_EMAIL || "admin@admin.com",
+    password: process.env.ADMIN_PASSWORD || "admin123admin",
     role: "staff"
   };
 
