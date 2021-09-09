@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  auth:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      JWT_SECRET: dasldjh4h1jk4kadhasdsa
+      MONGO_URI: mongodb://mongo-db:27017/auth
+    depends_on:
+      - mongo-db
+  mongo-db:
+    image: mongo
+    ports: 
+      - 27017:27017
+    volumes:
+      - .mongo:/data/db
