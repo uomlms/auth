@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(
   cookieSession({
     signed: false, // no encyption
-    secure: process.env.NODE_ENV !== 'test', // only https except we are testing
+    secure: process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'dev', // only https except we are testing
   })
 )
 

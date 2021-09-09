@@ -15,7 +15,11 @@
   "servers": [
     {
       "url": "https://uomlms.dev",
-      "description": "Development server"
+      "description": "Skaffold Development"
+    },
+    {
+      "url": "http://localhost:3000",
+      "description": "Local Development"
     }
   ],
   "tags": [
