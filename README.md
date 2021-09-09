@@ -30,7 +30,7 @@ $ docker-compose up
 ```
 
 Navigate to http://localhost:3000<br>
-Service Documentation: http://localhost:3000
+Service Documentation: http://localhost:3000/api/users/docs
 
 
 ## Test
