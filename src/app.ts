@@ -11,7 +11,7 @@ import dotenv from 'dotenv';
 import { resolve } from "path"
 import cookieSession from 'cookie-session';
 import swaggerUi from 'swagger-ui-express';
-import docs from '../openapi/docs.json';
+import docs from '../docs/docs.json';
 
 import { currentUserRouter } from './routes/current-user';
 import { signinRouter } from './routes/signin';
