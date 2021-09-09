@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Authentication Service",
-    "description": "Authenticates the users. Handles Signup, Signin and Signout",
+    "description": "Authentication Service is responsible for authenticating the users. Provides endpoints for signup, signin, signout and current user information.",
     "contact": {
       "email": "orestis.ner@gmail.com"
     },
