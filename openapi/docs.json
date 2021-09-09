@@ -1,0 +1,219 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Authentication Service",
+    "description": "Authenticates the users. Handles Signup, Signin and Signout",
+    "contact": {
+      "email": "orestis.ner@gmail.com"
+    },
+    "license": {
+      "name": "Licensed Under MIT",
+      "url": "https://spdx.org/licenses/MIT.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://uomlms.dev",
+      "description": "Development server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "user"
+    }
+  ],
+  "paths": {
+    "/api/users/signup": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Signs up a user.",
+        "operationId": "signup",
+        "requestBody": {
+          "description": "User name, email and password",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the current user. If JWT is not provided as cookie, will return null",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "headers": {
+              "Set-Cookie": {
+                "schema": {
+                  "type": "string",
+                  "example": "express:sess=abcde12345; Path=/; HttpOnly"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid Input",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/users/signin": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Signs in a user",
+        "operationId": "signin",
+        "requestBody": {
+          "description": "User email and password",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Returns the user data with a JWT in Cookies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            },
+            "headers": {
+              "Set-Cookie": {
+                "schema": {
+                  "type": "string",
+                  "example": "express:sess=abcde12345; Path=/; HttpOnly"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid credentials"
+          }
+        }
+      }
+    },
+    "/api/users/signout": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Signs out a user",
+        "operationId": "signout",
+        "responses": {
+          "200": {
+            "description": "Stops the user sessions (Cookie deleted from brower)"
+          }
+        }
+      }
+    },
+    "/api/users/currentuser": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Returns the current user.",
+        "operationId": "currentuser",
+        "security": [
+          {
+            "cookieAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the current user's data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "default": "John Doe"
+          },
+          "email": {
+            "type": "string",
+            "default": "johndoe@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "default": "ahardpasswordhere"
+          },
+          "role": {
+            "type": "string",
+            "default": "student",
+            "enum": [
+              "student",
+              "staff"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "default": "2021-09-09T08:13:01.308Z"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "password"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "cookieAuth": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "express:sess"
+      }
+    }
+  }
+}
