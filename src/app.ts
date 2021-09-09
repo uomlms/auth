@@ -3,8 +3,6 @@
  * load in supertest without listering on
  * specific port
  */
-
-
 import express from 'express';
 import 'express-async-errors';
 import dotenv from 'dotenv';
@@ -32,7 +30,7 @@ app.use(express.json());
 app.use(
   cookieSession({
     signed: false, // no encyption
-    secure: process.env.NODE_ENV !== 'test' && process.env.NODE_ENV !== 'dev', // only https except we are testing
+    secure: !['test', 'dev'].includes(process.env.NODE_ENV!) // only https except we are testing or developing
   })
 )
 
